@@ -1,0 +1,40 @@
+# Dossiers exclus
+DL-Pokemon/
+DL-Pokemon copie/
+
+# Dataset Pokemon (trop volumineux - voir README pour lien Kaggle)
+DL-PokemonClassification/PokemonData/
+
+# Fichiers Claude
+.claude/
+CLAUDE.md
+claude.md
+
+# Fichiers système
+.DS_Store
+*.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Modèles volumineux (optionnel - décommenter si trop gros)
+# *.keras
+# *.h5
