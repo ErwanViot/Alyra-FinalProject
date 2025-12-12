@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import backgroundImg from './assets/background.png'
 
 const files = ref([])
 const results = ref([])
@@ -39,6 +40,11 @@ async function predict() {
     })
     const data = await response.json()
     results.value = data.results
+
+    // Scroll vers les résultats
+    setTimeout(() => {
+      document.querySelector('.results')?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
   } catch (error) {
     console.error('Erreur:', error)
     alert('Erreur lors de la prédiction')
@@ -58,7 +64,7 @@ function formatConfidence(confidence) {
 
 <template>
   <div class="app">
-    <div class="hero">
+    <div class="hero" :style="{ backgroundImage: `url(${backgroundImg})` }">
       <div class="upload-zone">
         <div
           class="dropzone"
@@ -142,13 +148,21 @@ body {
   color: #fff;
 }
 
+#app {
+  width: 100%;
+}
+
 .app {
+  width: 100%;
   min-height: 100vh;
 }
 
 .hero {
+  width: 100%;
   height: 100vh;
-  background: url('/background.png') center center / cover no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,7 +195,7 @@ body {
   box-shadow: 0 0 30px rgba(254, 202, 87, 0.3);
 }
 
-.dropzone.has-files {
+.dropzone {
   padding: 1rem;
 }
 
@@ -191,6 +205,10 @@ body {
 
 .dropzone-content {
   text-align: center;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dropzone-content label {
@@ -329,9 +347,9 @@ body {
 
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -343,8 +361,9 @@ body {
 
 .result-card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 350px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .predictions {
